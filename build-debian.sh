@@ -1,10 +1,12 @@
 #!/bin/bash
+set -e
+
 ACSOPATCH_VER=6.3
 KERNEL_VER=6.3
 sudo apt install build-essential libncurses5-dev fakeroot xz-utils libelf-dev liblz4-tool \
   unzip flex bison bc debhelper rsync libssl-dev:native
 wget -N https://github.com/torvalds/linux/archive/refs/tags/v$KERNEL_VER.zip
-unzip -o v$KERNEL_VER.zip
+unzip -o -q v$KERNEL_VER.zip
 cd linux-$KERNEL_VER
 patch -p1 < ../$ACSOPATCH_VER/acso.patch
 # Disable kernel signing
